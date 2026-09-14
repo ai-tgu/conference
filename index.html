@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Hội Nghị Chuyển Đổi Số - ĐH Tiền Giang</title>
 	<!-- Tailwind CSS -->
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+	<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+	<link href="[https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap](https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap)" rel="stylesheet">
 	<script>
 		tailwind.config = {
 			theme: {
@@ -33,7 +33,7 @@
 			background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
 			border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px 0 rgba(15, 60, 136, 0.15);
 		}
-		/* Custom Scrollbar for list containers */
+		/* Custom Scrollbar */
 		.custom-scroll::-webkit-scrollbar { width: 6px; }
 		.custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
 		.custom-scroll::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
@@ -44,18 +44,95 @@
 	<!-- PHẦN 1: QUẢN LÝ DỮ LIỆU (DATA) CỦA WEBSITE -->
 	<!-- ========================================== -->
 	<script src="1391/data.js"></script>
+
+	<!-- Firebase SDK -->
+	<script type="module">
+	  import { initializeApp } from "[https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js](https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js)";
+	  import { getFirestore, collection, addDoc, serverTimestamp } from "[https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js](https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js)";
+
+	  // TODO: Thay thế firebaseConfig bên dưới bằng config từ Firebase Console của bạn
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyDrMMrGH3DH0PBnhLRjR2Rkm9_umdPm8hM",
+	    authDomain: "ai-tgu.firebaseapp.com",
+	    projectId: "ai-tgu",
+	    storageBucket: "ai-tgu.firebasestorage.app",
+	    messagingSenderId: "762464406232",
+	    appId: "1:762464406232:web:fae91557988154362de5ad",
+	    measurementId: "G-MW8CF45Y0T"
+	  };
+
+	  // Khởi tạo Firebase
+	  let app;
+	  let db;
+	  try {
+		app = initializeApp(firebaseConfig);
+		db = getFirestore(app);
+	  } catch(e) {
+		console.warn("Firebase chưa được cấu hình. Form Góp ý sẽ chạy chế độ demo.");
+	  }
+
+	  // Gắn hàm submit vào window để có thể gọi từ giao diện
+	  window.submitGopYToFirebase = async function(event) {
+		event.preventDefault();
+		
+		const name = document.getElementById('gopy_name').value;
+		const org = document.getElementById('gopy_org').value;
+		const content = document.getElementById('gopy_content').value;
+		
+		const btn = document.getElementById('gopy_submit_btn');
+		const statusBox = document.getElementById('gopy_status');
+		
+		btn.disabled = true;
+		btn.innerHTML = '⏳ Đang gửi...';
+		btn.classList.replace('bg-blue-600', 'bg-gray-400');
+
+		try {
+			if(db) {
+				// Ghi dữ liệu vào collection 'feedbacks'
+				await addDoc(collection(db, "feedbacks"), {
+					name: name,
+					organization: org,
+					content: content,
+					timestamp: serverTimestamp()
+				});
+			} else {
+				// Chế độ demo (khi chưa có config Firebase)
+				await new Promise(resolve => setTimeout(resolve, 1500));
+				console.log("Demo Data:", {name, org, content});
+			}
+
+			statusBox.innerHTML = '✅ Đã gửi ý kiến thành công! Cảm ơn bạn.';
+			statusBox.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+			statusBox.classList.add('bg-green-100', 'text-green-700', 'block');
+			
+			document.getElementById('form-gop-y').reset();
+			
+			setTimeout(() => { dongGopY(); }, 3000);
+		} catch (error) {
+			console.error("Lỗi khi gửi dữ liệu: ", error);
+			statusBox.innerHTML = '❌ Có lỗi xảy ra, vui lòng thử lại sau.';
+			statusBox.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+			statusBox.classList.add('bg-red-100', 'text-red-700', 'block');
+		} finally {
+			btn.disabled = false;
+			btn.innerHTML = 'Gửi đi';
+			btn.classList.replace('bg-gray-400', 'bg-blue-600');
+		}
+	  }
+	</script>
+
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 overflow-hidden h-screen w-full relative select-none">
 
 	<div class="absolute inset-0 z-0 bg-tech-abstract"></div>
-	<div class="absolute inset-0 z-0 opacity-20" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png')"></div>
+	<div class="absolute inset-0 z-0 opacity-20" style="background-image: url('[https://www.transparenttextures.com/patterns/cubes.png](https://www.transparenttextures.com/patterns/cubes.png)')"></div>
 
 	<div class="relative z-10 w-full h-full flex flex-col">
 		<!-- HEADER -->
 		<header class="w-full bg-white/95 shadow-md border-b-4 border-tg_gold py-3 px-6 flex justify-between items-center z-20">
 			<div class="flex items-center gap-4">
 				<div class="w-12 h-12 flex items-center justify-center shrink-0">
-					<img src="https://thumb.wikimedia.org/wikipedia/vi/thumb/d/d1/Logo_tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_Ti%E1%BB%81n_Giang.svg/960px-Logo_tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_Ti%E1%BB%81n_Giang.svg.png" alt="Logo TGU" class="w-full h-full object-contain">
+					<img src="[https://thumb.wikimedia.org/wikipedia/vi/thumb/d/d1/Logo_tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_Ti%E1%BB%81n_Giang.svg/960px-Logo_tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_Ti%E1%BB%81n_Giang.svg.png](https://thumb.wikimedia.org/wikipedia/vi/thumb/d/d1/Logo_tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_Ti%E1%BB%81n_Giang.svg/960px-Logo_tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_Ti%E1%BB%81n_Giang.svg.png)" alt="Logo TGU" class="w-full h-full object-contain">
 				</div>
 				<div>
 					<h2 class="text-[10px] md:text-xs text-gray-500 font-semibold uppercase tracking-wider">UBND TỈNH ĐỒNG THÁP</h2>
@@ -63,13 +140,10 @@
 				</div>
 			</div>
 			
-			<!-- Header Navigation & Agenda -->
 			<div class="flex items-center gap-3">
-				<!-- Nút Chương trình -->
 				<button onclick="moLichTrinh()" class="flex items-center justify-center gap-1.5 md:gap-2 bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 md:py-2 px-3 md:px-4 rounded-full border border-amber-300 shadow-sm transition font-bold text-xs md:text-sm whitespace-nowrap">
 					<span>📅</span> <span class="hidden md:inline">Chương trình hội nghị</span><span class="inline md:hidden">Lịch trình</span>
 				</button>
-				<!-- Vị trí hiện tại -->
 				<div id="nav-indicator" class="hidden md:flex items-center text-sm font-semibold text-gray-600 bg-gray-100 py-1.5 px-4 rounded-full border shadow-inner">
 					<span class="text-tg_blue mr-2">📍 Đang ở:</span> <span id="current-location-text">Sảnh Chính</span>
 				</div>
@@ -78,17 +152,14 @@
 
 		<main class="flex-1 w-full h-full relative p-2 md:p-4 lg:p-8 overflow-hidden">
 			
-			<!-- SẢNH CHÍNH (DẠNG DASHBOARD - TỐI ƯU MOBILE) -->
+			<!-- SẢNH CHÍNH -->
 			<section id="sanh-chinh" class="view-section w-full h-full flex flex-col items-center justify-start lg:justify-center fade-enter-active p-2 md:p-4 lg:p-8 overflow-y-auto custom-scroll">
-				
-				<!-- Bỏ max-h để mobile có thể cuộn, trên desktop (lg) thì cố định chiều cao -->
-				<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-stretch lg:h-full lg:max-h-[750px] pb-10 lg:pb-0">
+				<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-stretch lg:h-full lg:max-h-[750px] pb-24 lg:pb-0">
 					
-					<!-- CỘT TRÁI: THÔNG TIN & MAP -->
+					<!-- CỘT TRÁI -->
 					<div class="lg:col-span-8 glass-panel rounded-2xl p-4 md:p-6 lg:p-8 flex flex-col relative overflow-hidden shadow-xl lg:shadow-2xl">
 						<div class="absolute top-0 left-0 w-1.5 md:w-2 h-full bg-tg_gold"></div>
 						
-						<!-- Header Thông tin -->
 						<div class="mb-4 lg:mb-6 ml-2 lg:ml-0">
 							<span class="inline-block py-0.5 px-2 md:py-1 md:px-3 rounded-full bg-tg_blue/10 text-tg_blue font-bold text-[10px] md:text-xs mb-2 lg:mb-3 border border-tg_blue/20">THÔNG TIN SỰ KIỆN</span>
 							<h3 class="text-xl md:text-2xl lg:text-3xl font-heading font-extrabold text-gray-800 mb-1 lg:mb-2 leading-tight">
@@ -103,20 +174,17 @@
 							</div>
 						</div>
 
-						<!-- Bản đồ Google Map (Mỏng trên Mobile, Rộng trên Desktop) -->
 						<div class="w-full h-32 md:h-40 lg:flex-1 lg:h-auto bg-gray-200 rounded-xl overflow-hidden border-2 border-gray-100 relative min-h-[128px] lg:min-h-[200px]">
 							<iframe 
-								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1387.3310757029908!2d106.33243718029375!3d10.424364380713914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310abb77abfeb299%3A0x3047216743107681!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBUaeG7gW4gR2lhbmc!5e0!3m2!1svi!2s!4v1789372386897!5m2!1svi!2s"
+								src="[https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1387.3310757029908!2d106.33243718029375!3d10.424364380713914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310abb77abfeb299%3A0x3047216743107681!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBUaeG7gW4gR2lhbmc!5e0!3m2!1svi!2s!4v1789372386897!5m2!1svi!2s](https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1387.3310757029908!2d106.33243718029375!3d10.424364380713914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310abb77abfeb299%3A0x3047216743107681!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBUaeG7gW4gR2lhbmc!5e0!3m2!1svi!2s!4v1789372386897!5m2!1svi!2s)"
 								class="absolute inset-0 w-full h-full border-0" 
 								allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 							</iframe>
 						</div>
 					</div>
 
-					<!-- CỘT PHẢI: MENU ĐIỀU HƯỚNG -->
+					<!-- CỘT PHẢI -->
 					<div class="lg:col-span-4 flex flex-col gap-3 lg:gap-4 justify-center w-full">
-						
-						<!-- Nút 1: Khách mời -->
 						<button onclick="chuyenKhuVuc('khu-khach-moi', 'Ban Tổ Chức & Khách Mời')" class="group w-full rounded-xl overflow-hidden shadow-md lg:shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl text-left bg-white/95 backdrop-blur flex items-center h-20 md:h-24 lg:h-28 border-r-4 border-emerald-500">
 							<div class="w-20 lg:w-24 h-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shrink-0">
 								<span class="text-3xl lg:text-4xl group-hover:scale-110 transition-transform">👥</span>
@@ -127,7 +195,6 @@
 							</div>
 						</button>
 
-						<!-- Nút 2: Tài liệu -->
 						<button onclick="chuyenKhuVuc('khu-tai-lieu', 'Tài Liệu CĐS')" class="group w-full rounded-xl overflow-hidden shadow-md lg:shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl text-left bg-white/95 backdrop-blur flex items-center h-20 md:h-24 lg:h-28 border-r-4 border-amber-500">
 							<div class="w-20 lg:w-24 h-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shrink-0">
 								<span class="text-3xl lg:text-4xl group-hover:scale-110 transition-transform">📚</span>
@@ -138,7 +205,6 @@
 							</div>
 						</button>
 
-						<!-- Nút 3: Video -->
 						<button onclick="chuyenKhuVuc('khu-video', 'Không Gian TGU (Video)')" class="group w-full rounded-xl overflow-hidden shadow-md lg:shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl text-left bg-white/95 backdrop-blur flex items-center h-20 md:h-24 lg:h-28 border-r-4 border-violet-500">
 							<div class="w-20 lg:w-24 h-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
 								<span class="text-3xl lg:text-4xl group-hover:scale-110 transition-transform">🏛️</span>
@@ -149,11 +215,9 @@
 							</div>
 						</button>
 
-						<!-- Thông báo nhỏ gọn ở cuối -->
 						<div class="mt-1 lg:mt-2 text-center text-[10px] lg:text-xs font-semibold text-gray-500 bg-white/50 py-1.5 rounded-lg backdrop-blur">
 							Vuốt để xem thêm thông tin sự kiện
 						</div>
-
 					</div>
 				</div>
 			</section>
@@ -172,34 +236,20 @@
 				</div>
 			</section>
 
-			<!-- KHU SÂN KHẤU (Bị ẩn khỏi Menu nhưng giữ code nếu cần dùng sau này) -->
-			<section id="khu-san-khau" class="view-section w-full h-full hidden absolute inset-0 p-2 md:p-4 lg:p-8 flex items-center justify-center">
-				<div class="w-full max-w-6xl h-full max-h-[800px] glass-panel rounded-2xl p-4 md:p-6 flex flex-col relative">
-					<button onclick="quayVeSanh()" class="absolute -top-3 -right-3 md:-top-4 md:-right-4 bg-red-600 text-white rounded-full p-2 md:p-3 shadow-lg hover:bg-red-700 transition z-50">❌</button>
-					<div class="mb-4 flex justify-between"><h2 class="text-lg md:text-xl font-bold text-tg_blue">Trực tuyến Sân Khấu Chính</h2></div>
-					<div class="flex-1 bg-black rounded-xl flex items-center justify-center border-4 border-gray-800 text-white">
-						<div class="text-center"><h2 class="text-sm md:text-2xl">🎥 Đang truyền hình trực tiếp...</h2></div>
-					</div>
-				</div>
-			</section>
-
 			<!-- KHU TÀI LIỆU -->
 			<section id="khu-tai-lieu" class="view-section w-full h-full hidden absolute inset-0 p-2 md:p-4 lg:p-8 flex flex-col items-center">
 				<div class="w-full max-w-5xl glass-panel rounded-2xl p-4 md:p-6 lg:p-8 shadow-xl relative flex flex-col h-full">
-					
 					<div class="flex flex-col md:flex-row justify-between items-start md:items-start mb-4 md:mb-6 gap-3">
 						<div><h2 class="text-xl md:text-2xl font-heading font-bold text-gray-800">📚 Tài liệu tham luận & Báo cáo</h2></div>
 						<button onclick="quayVeSanh()" class="bg-gray-100 hover:bg-red-500 hover:text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-bold transition text-sm md:text-base whitespace-nowrap shrink-0">⬅ Quay lại Sảnh</button>
 					</div>
 					
 					<div class="flex flex-col lg:flex-row gap-4 md:gap-6 h-full min-h-0 overflow-y-auto lg:overflow-y-visible">
-						<!-- Danh mục Tài liệu -->
 						<div class="w-full lg:w-1/3 bg-white rounded-xl border p-3 md:p-4 shrink-0 lg:shrink lg:overflow-y-auto custom-scroll">
 							<h3 class="font-bold text-gray-700 mb-3 md:mb-4 border-b pb-2">Danh mục Slide</h3>
 							<ul id="document-list-container" class="space-y-2 md:space-y-3"></ul>
 						</div>
 
-						<!-- Trình xem tài liệu -->
 						<div class="w-full lg:w-2/3 bg-gray-100 rounded-xl border flex flex-col relative overflow-hidden min-h-[350px] md:min-h-[500px]">
 							<div id="doc-placeholder" class="absolute inset-0 bg-white m-2 md:m-4 rounded shadow flex items-center justify-center text-center p-4 md:p-8 z-10">
 								<div>
@@ -243,26 +293,64 @@
 				</div>
 			</section>
 
+			<!-- NÚT GÓP Ý DẠNG NỔI (FAB) -->
+			<button onclick="moGopY()" class="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-blue-600 text-white rounded-full shadow-2xl hover:bg-blue-700 hover:scale-110 transition-all flex items-center justify-center p-3 md:p-4 z-40 group">
+				<span class="text-2xl">💬</span>
+				<span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 font-bold ml-0 group-hover:ml-2">Gửi Ý Kiến</span>
+			</button>
+
 			<!-- MODAL LỊCH TRÌNH -->
 			<div id="modal-lich-trinh" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity p-4">
 				<div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden mx-auto flex flex-col max-h-[90vh]">
-					<!-- Modal Header -->
 					<div class="bg-tg_blue p-3 md:p-4 flex justify-between items-center shrink-0">
 						<h3 class="text-white font-heading font-bold text-base md:text-xl flex items-center gap-2">📅 Chương trình Hội nghị</h3>
 						<button onclick="dongLichTrinh()" class="text-white hover:text-red-300 transition text-2xl md:text-3xl leading-none px-2">&times;</button>
 					</div>
-					<!-- Modal Body (Timeline) -->
 					<div class="p-4 md:p-6 overflow-y-auto custom-scroll flex-1">
 						<div class="relative border-l-2 border-tg_gold ml-2 md:ml-3" id="agenda-container">
 							<!-- JS sẽ đổ dữ liệu lịch trình vào đây -->
 						</div>
 					</div>
-					<!-- Modal Footer -->
 					<div class="p-3 md:p-4 bg-gray-50 border-t text-right shrink-0">
 						<button onclick="dongLichTrinh()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 md:px-6 py-1.5 md:py-2 rounded-lg font-bold transition shadow-sm text-sm md:text-base">Đóng lại</button>
 					</div>
 				</div>
 			</div>
+
+			<!-- MODAL GÓP Ý (FORM) -->
+			<div id="modal-gop-y" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity p-4">
+				<div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden mx-auto flex flex-col">
+					<div class="bg-blue-600 p-3 md:p-4 flex justify-between items-center shrink-0">
+						<h3 class="text-white font-heading font-bold text-base md:text-xl flex items-center gap-2">💬 Gửi Câu Hỏi / Đóng Góp</h3>
+						<button onclick="dongGopY()" class="text-white hover:text-red-300 transition text-2xl md:text-3xl leading-none px-2">&times;</button>
+					</div>
+					<div class="p-4 md:p-6">
+						<form id="form-gop-y" onsubmit="submitGopYToFirebase(event)" class="flex flex-col gap-4">
+							<div>
+								<label class="block text-sm font-bold text-gray-700 mb-1">Họ và Tên *</label>
+								<input type="text" id="gopy_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="VD: Nguyễn Văn A">
+							</div>
+							<div>
+								<label class="block text-sm font-bold text-gray-700 mb-1">Đơn vị công tác</label>
+								<input type="text" id="gopy_org" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="VD: Khoa Công nghệ Thông tin">
+							</div>
+							<div>
+								<label class="block text-sm font-bold text-gray-700 mb-1">Nội dung ý kiến / Câu hỏi *</label>
+								<textarea id="gopy_content" required rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="Nhập nội dung vào đây..."></textarea>
+							</div>
+							<div id="gopy_status" class="hidden text-sm font-bold text-center py-2 rounded-lg"></div>
+							
+							<div class="flex justify-end gap-3 mt-2">
+								<button type="button" onclick="dongGopY()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-bold transition text-sm">Hủy</button>
+								<button type="submit" id="gopy_submit_btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold transition shadow-md text-sm flex items-center gap-2">
+									<span>Gửi đi</span>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
 		</main>
 	</div>
 
@@ -270,11 +358,9 @@
 	<!-- PHẦN 2: XỬ LÝ GIAO DIỆN & RENDER DỮ LIỆU JS -->
 	<!-- ========================================== -->
 	<script>
-		// --- LOGIC ĐIỀU HƯỚNG ---
 		const views = {
 			'sanh-chinh': document.getElementById('sanh-chinh'),
 			'khu-khach-moi': document.getElementById('khu-khach-moi'),
-			'khu-san-khau': document.getElementById('khu-san-khau'),
 			'khu-tai-lieu': document.getElementById('khu-tai-lieu'),
 			'khu-video': document.getElementById('khu-video')
 		};
@@ -309,47 +395,34 @@
 						v.classList.remove('fade-enter-active', 'fade-exit-active');
 					});
 					views['sanh-chinh'].classList.remove('hidden');
+					
+					const ytPlayer = document.getElementById('youtube-player');
+					if(ytPlayer) { ytPlayer.src = ytPlayer.src; }
+
 					setTimeout(() => { views['sanh-chinh'].classList.add('fade-enter-active'); }, 10);
 				}, 300);
 			}
 		}
 
-		// --- LOGIC ĐÓNG/MỞ MODAL LỊCH TRÌNH ---
-		function moLichTrinh() {
-			document.getElementById('modal-lich-trinh').classList.remove('hidden');
-		}
+		// --- MODAL LỊCH TRÌNH ---
+		function moLichTrinh() { document.getElementById('modal-lich-trinh').classList.remove('hidden'); }
+		function dongLichTrinh() { document.getElementById('modal-lich-trinh').classList.add('hidden'); }
 
-		function dongLichTrinh() {
-			document.getElementById('modal-lich-trinh').classList.add('hidden');
+		// --- MODAL GÓP Ý ---
+		function moGopY() { 
+			document.getElementById('modal-gop-y').classList.remove('hidden'); 
+			document.getElementById('gopy_status').classList.add('hidden');
 		}
+		function dongGopY() { document.getElementById('modal-gop-y').classList.add('hidden'); }
 
-		// --- LOGIC RENDER DỮ LIỆU ĐỘNG ---
+		// --- RENDER DỮ LIỆU ---
 		function renderGuests() {
 			const container = document.getElementById('guest-list-container');
 			let html = '';
-			
 			CONFERENCE_DATA.guestGroups.forEach(group => {
-				html += `
-					<div class="mb-6 md:mb-10">
-						<h3 class="text-lg md:text-xl font-heading font-bold text-gray-800 mb-3 md:mb-4 flex items-center">
-							<span class="w-1.5 md:w-2 h-5 md:h-6 bg-${group.themeColor} mr-2 md:mr-3 rounded"></span> ${group.title}
-						</h3>
-						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-				`;
-				
+				html += `<div class="mb-6 md:mb-10"><h3 class="text-lg md:text-xl font-heading font-bold text-gray-800 mb-3 md:mb-4 flex items-center"><span class="w-1.5 md:w-2 h-5 md:h-6 bg-${group.themeColor} mr-2 md:mr-3 rounded"></span> ${group.title}</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">`;
 				group.members.forEach(member => {
-					html += `
-						<div class="bg-white rounded-xl p-3 md:p-5 shadow border border-gray-100 flex items-center space-x-3 md:space-x-4 hover:shadow-md transition">
-							<div class="w-10 h-10 md:w-14 md:h-14 min-w-[40px] md:min-w-[56px] rounded-full bg-gray-100 border-2 border-${group.themeColor} flex items-center justify-center">
-								<span class="text-gray-400 text-base md:text-xl">${member.avatarIcon}</span>
-							</div>
-							<div>
-								<h4 class="font-bold text-gray-800 text-xs md:text-sm">${member.name}</h4>
-								<p class="text-[10px] md:text-xs text-gray-600 font-medium">${member.role}</p>
-								<p class="text-[9px] md:text-[10px] text-gray-400 mt-0.5 md:mt-1 uppercase">${member.subtitle}</p>
-							</div>
-						</div>
-					`;
+					html += `<div class="bg-white rounded-xl p-3 md:p-5 shadow border border-gray-100 flex items-center space-x-3 md:space-x-4 hover:shadow-md transition"><div class="w-10 h-10 md:w-14 md:h-14 min-w-[40px] md:min-w-[56px] rounded-full bg-gray-100 border-2 border-${group.themeColor} flex items-center justify-center"><span class="text-gray-400 text-base md:text-xl">${member.avatarIcon}</span></div><div><h4 class="font-bold text-gray-800 text-xs md:text-sm">${member.name}</h4><p class="text-[10px] md:text-xs text-gray-600 font-medium">${member.role}</p><p class="text-[9px] md:text-[10px] text-gray-400 mt-0.5 md:mt-1 uppercase">${member.subtitle}</p></div></div>`;
 				});
 				html += `</div></div>`;
 			});
@@ -359,11 +432,8 @@
 		function moTaiLieu(title, url, type) {
 			document.getElementById('doc-placeholder').style.display = 'none';
 			const iframe = document.getElementById('doc-iframe');
-			
-			if (type.toUpperCase() === 'PDF') {
-				iframe.src = url;
-			} 
-			else if (type.toUpperCase() === 'PPTX' || type.toUpperCase() === 'DOCX') {
+			if (type.toUpperCase() === 'PDF') { iframe.src = url; } 
+			else {
 				iframe.src = '';
 				document.getElementById('doc-placeholder').style.display = 'flex';
 				document.getElementById('doc-viewer-title').innerHTML = `Đang tải xuống: ${title}<br><span class="text-xs md:text-sm text-red-500">Trình duyệt không hỗ trợ xem trực tiếp định dạng ${type}</span>`;
@@ -374,18 +444,9 @@
 		function renderDocuments() {
 			const container = document.getElementById('document-list-container');
 			let html = '';
-			
 			CONFERENCE_DATA.documents.forEach((doc, index) => {
-				const isActive = index === 0;
-				const bgClass = isActive ? 'bg-amber-50 border-amber-200 border-l-4 border-l-amber-500' : 'bg-white border-gray-200 hover:bg-gray-50';
-				
-				html += `
-					<li class="p-2 md:p-3 ${bgClass} rounded-lg cursor-pointer transition shadow-sm border" 
-						onclick="moTaiLieu('${doc.title}', '${doc.url}', '${doc.type}')">
-						<h4 class="font-bold text-xs md:text-sm text-gray-800 line-clamp-2">${doc.title}</h4>
-						<p class="text-[10px] md:text-xs text-gray-500 mt-1">${doc.type} • ${doc.size}</p>
-					</li>
-				`;
+				const bgClass = index === 0 ? 'bg-amber-50 border-amber-200 border-l-4 border-l-amber-500' : 'bg-white border-gray-200 hover:bg-gray-50';
+				html += `<li class="p-2 md:p-3 ${bgClass} rounded-lg cursor-pointer transition shadow-sm border" onclick="moTaiLieu('${doc.title}', '${doc.url}', '${doc.type}')"><h4 class="font-bold text-xs md:text-sm text-gray-800 line-clamp-2">${doc.title}</h4><p class="text-[10px] md:text-xs text-gray-500 mt-1">${doc.type} • ${doc.size}</p></li>`;
 			});
 			container.innerHTML = html;
 		}
@@ -398,48 +459,19 @@
 		function renderVideos() {
 			const container = document.getElementById('video-list-container');
 			let html = '';
-			
 			CONFERENCE_DATA.videos.forEach((vid, index) => {
-				const isActive = index === 0;
-				const bgClass = isActive ? 'bg-violet-50 border-violet-200 border-l-4 border-l-violet-500' : 'bg-gray-50 border-gray-200 hover:bg-gray-100';
-				
-				html += `
-					<div class="p-2 md:p-3 ${bgClass} rounded-lg cursor-pointer transition border flex gap-2 md:gap-3 items-center" 
-						onclick="playVideo('${vid.title}', '${vid.youtubeUrl}')">
-						<div class="w-12 h-9 md:w-16 md:h-12 bg-gray-300 rounded flex items-center justify-center text-gray-500 relative flex-shrink-0">
-							<span class="text-xs md:text-base">▶</span>
-							<span class="absolute bottom-0.5 right-0.5 md:bottom-1 md:right-1 bg-black/70 text-white text-[8px] md:text-[9px] px-1 rounded">${vid.duration}</span>
-						</div>
-						<div>
-							<h4 class="font-bold text-[10px] md:text-xs text-gray-800 line-clamp-2">${vid.title}</h4>
-						</div>
-					</div>
-				`;
+				const bgClass = index === 0 ? 'bg-violet-50 border-violet-200 border-l-4 border-l-violet-500' : 'bg-gray-50 border-gray-200 hover:bg-gray-100';
+				html += `<div class="p-2 md:p-3 ${bgClass} rounded-lg cursor-pointer transition border flex gap-2 md:gap-3 items-center" onclick="playVideo('${vid.title}', '${vid.youtubeUrl}')"><div class="w-12 h-9 md:w-16 md:h-12 bg-gray-300 rounded flex items-center justify-center text-gray-500 relative flex-shrink-0"><span class="text-xs md:text-base">▶</span><span class="absolute bottom-0.5 right-0.5 md:bottom-1 md:right-1 bg-black/70 text-white text-[8px] md:text-[9px] px-1 rounded">${vid.duration}</span></div><div><h4 class="font-bold text-[10px] md:text-xs text-gray-800 line-clamp-2">${vid.title}</h4></div></div>`;
 			});
 			container.innerHTML = html;
-			
-			if(CONFERENCE_DATA.videos.length > 0) {
-				playVideo(CONFERENCE_DATA.videos[0].title, CONFERENCE_DATA.videos[0].youtubeUrl);
-			}
+			if(CONFERENCE_DATA.videos.length > 0) { playVideo(CONFERENCE_DATA.videos[0].title, CONFERENCE_DATA.videos[0].youtubeUrl); }
 		}
 
 		function renderLichTrinh() {
 			const container = document.getElementById('agenda-container');
 			let html = '';
-			
 			CONFERENCE_DATA.agenda.forEach(item => {
-				html += `
-					<div class="mb-4 md:mb-6 ml-4 md:ml-6 relative">
-						<!-- Chấm tròn Timeline -->
-						<span class="absolute -left-[23px] md:-left-[33px] top-0.5 md:top-1 w-3 h-3 md:w-4 md:h-4 bg-tg_gold rounded-full border-2 border-white shadow"></span>
-						<!-- Nội dung -->
-						<div class="bg-gray-50 rounded-lg p-2.5 md:p-3 border border-gray-200 shadow-sm hover:shadow-md transition">
-							<div class="text-xs md:text-sm font-bold text-tg_blue mb-0.5 md:mb-1">${item.time}</div>
-							<div class="text-xs md:text-sm text-gray-800 font-semibold">${item.activity}</div>
-							<div class="text-[10px] md:text-xs text-gray-500 mt-1 flex items-center gap-1">👤 ${item.location}</div>
-						</div>
-					</div>
-				`;
+				html += `<div class="mb-4 md:mb-6 ml-4 md:ml-6 relative"><span class="absolute -left-[23px] md:-left-[33px] top-0.5 md:top-1 w-3 h-3 md:w-4 md:h-4 bg-tg_gold rounded-full border-2 border-white shadow"></span><div class="bg-gray-50 rounded-lg p-2.5 md:p-3 border border-gray-200 shadow-sm hover:shadow-md transition"><div class="text-xs md:text-sm font-bold text-tg_blue mb-0.5 md:mb-1">${item.time}</div><div class="text-xs md:text-sm text-gray-800 font-semibold">${item.activity}</div><div class="text-[10px] md:text-xs text-gray-500 mt-1 flex items-center gap-1">👤 ${item.location}</div></div></div>`;
 			});
 			container.innerHTML = html;
 		}
@@ -450,18 +482,6 @@
 			renderVideos();
 			renderLichTrinh();
 		});
-	</script>
-
-	<!-- Script Bảo Vệ Giao Diện -->
-	<script>
-		// document.addEventListener('contextmenu', event => event.preventDefault());
-		// document.onkeydown = function(e) {
-		// 	if (e.keyCode == 123) return false; 
-		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
-		// 	if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
-		// 	if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; 
-		// }
 	</script>
 </body>
 </html>
