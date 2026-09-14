@@ -6,18 +6,30 @@ const CONFERENCE_DATA = {
       title: "Ban Chỉ Đạo & Ban Tổ Chức",
       themeColor: "tg_gold", 
       members: [
-        { name: "TS. Cao Nguyên Thi", role: "Phó Hiệu trưởng", subtitle: "Trưởng ban", avatarIcon: "👤" },
-        { name: "TS. Bùi Quang Thịnh", role: "PTP.PT P.QLKHCN&HTQT", subtitle: "Phó Trưởng Ban", avatarIcon: "👤" }
+        { name: "PGS. TS. Lê Minh Tùng", role: "Quyền Hiệu trưởng", subtitle: "Trưởng ban Chỉ đạo", avatarIcon: "👤" },
+        { name: "TS. Cao Nguyên Thi", role: "Phó Hiệu trưởng", subtitle: "Trưởng BTC", avatarIcon: "👤" },
+        { name: "TS. Bùi Quang Thịnh", role: "PTP.PT P.QLKHCN&HTQT", subtitle: "Phó Trưởng BTC", avatarIcon: "👤" }
+      ]
+    },
+    {
+      id: "dien-gia",
+      title: "Diễn Giả",
+      themeColor: "emerald-500",
+      members: [
+        { name: "Ông ...", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
+        { name: "Ông ...", role: "ĐH Bách khoa TP.HCM", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
+        { name: "Ông Bùi Quang Thịnh", role: "Trường ĐH Tiền Giang", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
+        { name: "Ông Trần Huy Long", role: "Trường ĐH Tiền Giang", subtitle: "Báo cáo tham luận", avatarIcon: "👤" }
       ]
     },
     {
       id: "khach-moi",
-      title: "Khách Mời & Diễn Giả",
+      title: "Khách Mời",
       themeColor: "emerald-500",
       members: [
         { name: "Ông Ngô Huỳnh Quang Thái", role: "GĐ Sở KH&CN tỉnh Đồng Tháp", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
         { name: "Ông ...", role: "Chuyên gia CĐS - ĐH ...", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
-        { name: "Ông Trần Huy Long", role: "Phó GĐ. TTTT-TV", subtitle: "Báo cáo tham luận", avatarIcon: "👤" }
+        { name: "Ông ...", role: "Phó GĐ. TTTT-TV", subtitle: "Báo cáo tham luận", avatarIcon: "👤" }
       ]
     },
     {
