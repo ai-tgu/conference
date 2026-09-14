@@ -213,7 +213,7 @@
 							<ul id="document-list-container" class="space-y-3"></ul>
 						</div>
 
-						<!-- Trình xem tài liệu -->
+						<!-- Trình xem tài liệu (Đã cấu trúc đúng) -->
 						<div class="w-full lg:w-2/3 bg-gray-100 rounded-xl border flex flex-col relative overflow-hidden min-h-[500px]">
 							<div id="doc-placeholder" class="absolute inset-0 bg-white m-4 rounded shadow flex items-center justify-center text-center p-8 z-10">
 								<div>
@@ -408,16 +408,16 @@
 		});
 	</script>
 
-	<!-- Script Bảo Vệ Giao Diện -->
+	<!-- Script Bảo Vệ Giao Diện (Tạm thời vô hiệu hóa bằng dấu // để bạn dễ sửa lỗi, khi nào chạy thật thì xóa // đi nhé) -->
 	<script>
-		document.addEventListener('contextmenu', event => event.preventDefault());
-		document.onkeydown = function(e) {
-			if (e.keyCode == 123) return false; // F12
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
-			if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
-			if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; // Ctrl+S
-		}
+		// document.addEventListener('contextmenu', event => event.preventDefault());
+		// document.onkeydown = function(e) {
+		// 	if (e.keyCode == 123) return false; 
+		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
+		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
+		// 	if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
+		// 	if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; 
+		// }
 	</script>
 </body>
 </html>
