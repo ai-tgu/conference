@@ -353,17 +353,10 @@
 				iframe.src = url;
 			} 
 			else if (type.toUpperCase() === 'PPTX' || type.toUpperCase() === 'DOCX') {
-				// LƯU Ý QUAN TRỌNG: Trình duyệt KHÔNG THỂ đọc trực tiếp file PPTX, Word.
-				// Bạn phải dùng dịch vụ của Google/Microsoft để đọc hộ, HOẶC cho người dùng tải về.
-				
-				// Cách 1: Dùng Google Docs Viewer (Yêu cầu URL file của bạn phải là link public trên mạng)
-				// iframe.src = `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
-				
-				// Cách 2: (Khuyên dùng khi chạy ở máy tính ảo/offline) - Ép tải file xuống
 				iframe.src = '';
 				document.getElementById('doc-placeholder').style.display = 'flex';
 				document.getElementById('doc-viewer-title').innerHTML = `Đang tải xuống: ${title}<br><span class="text-sm text-red-500">Trình duyệt không hỗ trợ xem trực tiếp định dạng ${type}</span>`;
-				window.open(url, '_blank'); // Mở tab mới để trình duyệt tự động kích hoạt tải file
+				window.open(url, '_blank'); 
 			}
 		}
 
@@ -376,7 +369,7 @@
 				const isActive = index === 0;
 				const bgClass = isActive ? 'bg-amber-50 border-amber-200 border-l-4 border-l-amber-500' : 'bg-white border-gray-200 hover:bg-gray-50';
 				
-				// Gọi hàm moTaiLieu và truyền tham số url vào
+				// Đã xóa ký tự lạ ở dòng onclick
 				html += `
 					<li class="p-3 ${bgClass} rounded-lg cursor-pointer transition shadow-sm border" 
 						onclick="moTaiLieu('${doc.title}', '${doc.url}', '${doc.type}')">
