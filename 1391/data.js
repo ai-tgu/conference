@@ -42,7 +42,7 @@ const CONFERENCE_DATA = {
 
   // 3. DỮ LIỆU VIDEO (KHÔNG GIAN TGU)
   videos: [
-    { id: "vid1", title: "Phóng sự: Hành trình 20 năm phát triển TGU", duration: "15:30", embedCode: "https://www.youtube.com/embed/DWNYvUjl6Rc?si=Q2d_PNas9GmsEPvy" },
+    { id: "vid1", title: "KỶ NIỆM 21 NĂM NGÀY THÀNH LẬP TRƯỜNG ĐẠI HỌC TIỀN GIANG (06/6/2005 - 06/6/2026)", duration: "15:30", embedCode: "https://www.youtube.com/embed/DWNYvUjl6Rc" },
     { id: "vid2", title: "Thành tựu Chuyển đổi số năm học 2025-2026", duration: "08:15", embedCode: "Mã nhúng Youtube/Iframe 2" },
     { id: "vid3", title: "Giới thiệu cơ sở vật chất mới", duration: "05:45", embedCode: "Mã nhúng Youtube/Iframe 3" }
   ],
