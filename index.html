@@ -92,8 +92,8 @@
 						<div class="mb-4 lg:mb-6 ml-2 lg:ml-0">
 							<span class="inline-block py-0.5 px-2 md:py-1 md:px-3 rounded-full bg-tg_blue/10 text-tg_blue font-bold text-[10px] md:text-xs mb-2 lg:mb-3 border border-tg_blue/20">THÔNG TIN SỰ KIỆN</span>
 							<h3 class="text-xl md:text-2xl lg:text-3xl font-heading font-extrabold text-gray-800 mb-1 lg:mb-2 leading-tight">
-								HỘI NGHỊ ĐÁNH GIÁ KẾT QUẢ THỰC HIỆN<br>
-								NGHỊ QUYẾT SỐ 57-NQ/TW
+								HỘI NGHỊ ĐÁNH GIÁ KẾT QUẢ<br>
+								THỰC HIỆN NGHỊ QUYẾT SỐ 57-NQ/TW
 							</h3>
 							<h3 class="text-sm md:text-md font-semibold text-gray-600 mb-3 lg:mb-4">TRƯỜNG ĐẠI HỌC TIỀN GIANG</h3>
 							
@@ -229,8 +229,8 @@
 					
 					<div class="flex flex-col lg:flex-row gap-4 md:gap-6 h-full min-h-0 overflow-y-auto lg:overflow-y-visible">
 						<div class="w-full lg:w-2/3 flex flex-col shrink-0 lg:shrink">
-							<div class="w-full aspect-video bg-black rounded-xl shadow-inner flex items-center justify-center border-4 border-gray-200">
-								<span class="text-gray-500 text-sm md:text-base" id="video-player">Màn hình phát Video</span>
+							<div class="w-full aspect-video bg-black rounded-xl shadow-inner overflow-hidden border-4 border-gray-200">
+								<iframe id="youtube-player" src="" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</div>
 							<h3 class="text-base md:text-lg font-bold text-tg_blue mt-3 md:mt-4 line-clamp-2" id="video-title">Đang chọn: Phóng sự 20 năm...</h3>
 						</div>
@@ -390,6 +390,11 @@
 			container.innerHTML = html;
 		}
 
+		function playVideo(title, youtubeUrl) {
+			document.getElementById('video-title').innerText = title;
+			document.getElementById('youtube-player').src = youtubeUrl;
+		}
+
 		function renderVideos() {
 			const container = document.getElementById('video-list-container');
 			let html = '';
@@ -399,7 +404,8 @@
 				const bgClass = isActive ? 'bg-violet-50 border-violet-200 border-l-4 border-l-violet-500' : 'bg-gray-50 border-gray-200 hover:bg-gray-100';
 				
 				html += `
-					<div class="p-2 md:p-3 ${bgClass} rounded-lg cursor-pointer transition border flex gap-2 md:gap-3 items-center" onclick="document.getElementById('video-title').innerText='${vid.title}'">
+					<div class="p-2 md:p-3 ${bgClass} rounded-lg cursor-pointer transition border flex gap-2 md:gap-3 items-center" 
+						onclick="playVideo('${vid.title}', '${vid.youtubeUrl}')">
 						<div class="w-12 h-9 md:w-16 md:h-12 bg-gray-300 rounded flex items-center justify-center text-gray-500 relative flex-shrink-0">
 							<span class="text-xs md:text-base">▶</span>
 							<span class="absolute bottom-0.5 right-0.5 md:bottom-1 md:right-1 bg-black/70 text-white text-[8px] md:text-[9px] px-1 rounded">${vid.duration}</span>
@@ -413,7 +419,7 @@
 			container.innerHTML = html;
 			
 			if(CONFERENCE_DATA.videos.length > 0) {
-				document.getElementById('video-title').innerText = CONFERENCE_DATA.videos[0].title;
+				playVideo(CONFERENCE_DATA.videos[0].title, CONFERENCE_DATA.videos[0].youtubeUrl);
 			}
 		}
 
