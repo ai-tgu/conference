@@ -151,7 +151,6 @@ const CONFERENCE_DATA = {
         { name: "Nguyễn Hồng Cẩm", role: "Chuyên viên", subtitle: "TT.KT&ĐBCLGD", avatarIcon: "👤" },
         { name: "Giang Thị Kim Tú", role: "Phó GĐ", subtitle: "TT. ĐT BDTX-THNN", avatarIcon: "👤" }
       ]
-      ]
     }
   ],
 
