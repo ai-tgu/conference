@@ -43,11 +43,23 @@ const CONFERENCE_DATA = {
   // 3. DỮ LIỆU VIDEO (KHÔNG GIAN TGU)
   videos: [
     { 
-        id: "vid1", 
-        title: "KỶ NIỆM 21 NĂM NGÀY THÀNH LẬP TRƯỜNG ĐẠI HỌC TIỀN GIANG (06/6/2005 - 06/6/2026)", 
-        duration: "07:49", 
-        youtubeUrl: "https://www.youtube.com/embed/DWNYvUjl6Rc" 
-      }
+      id: "vid1", 
+      title: "KỶ NIỆM 21 NĂM NGÀY THÀNH LẬP TRƯỜNG ĐẠI HỌC TIỀN GIANG (06/6/2005 - 06/6/2026)", 
+      duration: "07:49", 
+      youtubeUrl: "https://www.youtube.com/embed/DWNYvUjl6Rc" 
+    },
+    { 
+      id: "vid2", 
+      title: "Dự án Thanh Âm đạt giải Ba tại Cuộc thi Đổi mới sáng tạo cấp thành phố INNOX 2026", 
+      duration: "03:28", 
+      youtubeUrl: "https://www.youtube.com/embed/Gku0_gDI0jE" 
+    },
+    { 
+      id: "vid3", 
+      title: "Trường Đại học Tiền Giang đẩy mạnh hợp tác quốc tế", 
+      duration: "03:56", 
+      youtubeUrl: "https://www.youtube.com/embed/KCCzdceBY0o" 
+    }
   ],
 
   // 4. DỮ LIỆU LỊCH TRÌNH
