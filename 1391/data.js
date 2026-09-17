@@ -16,10 +16,9 @@ const CONFERENCE_DATA = {
       title: "Diễn Giả",
       themeColor: "emerald-500",
       members: [
-        { name: "Ông ...", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
+        { name: "Ông Nguyễn Văn Đậm", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
         { name: "Ông ...", role: "ĐH Bách khoa TP.HCM", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
-        { name: "Ông Bùi Quang Thịnh", role: "Trường ĐH Tiền Giang", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
-        { name: "Ông Trần Huy Long", role: "Trường ĐH Tiền Giang", subtitle: "Báo cáo tham luận", avatarIcon: "👤" }
+        { name: "Ông Bùi Quang Thịnh", role: "Trường ĐH Tiền Giang", subtitle: "Báo cáo tham luận", avatarIcon: "👤" }
       ]
     },
     {
@@ -27,9 +26,7 @@ const CONFERENCE_DATA = {
       title: "Khách Mời",
       themeColor: "emerald-500",
       members: [
-        { name: "Ông Ngô Huỳnh Quang Thái", role: "GĐ Sở KH&CN tỉnh Đồng Tháp", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
-        { name: "Ông ...", role: "Chuyên gia CĐS - ĐH ...", subtitle: "Báo cáo tham luận", avatarIcon: "👤" },
-        { name: "Ông ...", role: "Phó GĐ. TTTT-TV", subtitle: "Báo cáo tham luận", avatarIcon: "👤" }
+        { name: "Ông Nguyễn Văn Đậm", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Phó Giám đốc", avatarIcon: "👤" }
       ]
     },
     {
