@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Sưu Tập Ảnh Tập Huấn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .tab-content.active {
+            display: grid;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .image-card {
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 4/3;
+        }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+        .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col">
+
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-blue-900 mb-6">Bộ Sưu Tập Ảnh Sự Kiện & Tập Huấn</h1>
+            
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4" id="tabs-container">
+                <button onclick="switchTab('ccb')" id="tab-btn-ccb" class="tab-btn px-5 py-2.5 rounded-full font-medium text-sm md:text-base transition-colors duration-200 bg-blue-600 text-white shadow-md">
+                    CCB
+                </button>
+                <button onclick="switchTab('102px')" id="tab-btn-102px" class="tab-btn px-5 py-2.5 rounded-full font-medium text-sm md:text-base transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    102PX
+                </button>
+                <button onclick="switchTab('ttyt')" id="tab-btn-ttyt" class="tab-btn px-5 py-2.5 rounded-full font-medium text-sm md:text-base transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    TTYT
+                </button>
+                <button onclick="switchTab('dtn')" id="tab-btn-dtn" class="tab-btn px-5 py-2.5 rounded-full font-medium text-sm md:text-base transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    DTN
+                </button>
+                <button onclick="switchTab('pmbq')" id="tab-btn-pmbq" class="tab-btn px-5 py-2.5 rounded-full font-medium text-sm md:text-base transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    PMBQ
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        <!-- Tab Content: CCB -->
+        <div id="content-ccb" class="tab-content active grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800 border-l-4 border-blue-600 pl-3">Tập huấn AI cho Hội Cựu Chiến Binh</h2>
+                <p class="text-gray-500 mt-2">Hình ảnh ghi nhận từ các buổi đào tạo công nghệ AI cho các hội viên CCB.</p>
+            </div>
+            <div class="image-card" onclick="openLightbox('CCB01.jpg', 'Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 1')">
+                <img src="CCB01.jpg" alt="CCB 1" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 1</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('CCB02.jpg', 'Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 2')">
+                <img src="CCB02.jpg" alt="CCB 2" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 2</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('CCB01.jpg', 'Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 3')">
+                <img src="CCB03.jpg" alt="CCB 3" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 3</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('CCB04.jpg', 'Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 4')">
+                <img src="CCB04.jpg" alt="CCB 4" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Hội Cựu Chiến Binh - Phường Mỹ Tho - Ảnh 4</span></div>
+            </div>
+        </div>
+
+        <!-- Tab Content: 102PX -->
+        <div id="content-102px" class="tab-content grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800 border-l-4 border-blue-600 pl-3">Tập huấn AI cho cán bộ chuyên trách 102 Phường/Xã và Sở ngành</h2>
+                <p class="text-gray-500 mt-2">Nâng cao năng lực ứng dụng trí tuệ nhân tạo cho cán bộ địa phương.</p>
+            </div>
+            <div class="image-card" onclick="openLightbox('102PX01.jpg', 'Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 1')">
+                <img src="102PX01.jpg" alt="102PX 1" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 1</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('102PX02.jpg', 'Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 2')">
+                <img src="102PX02.jpg" alt="102PX 2" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 2</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('102PX03.jpg', 'Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 3')">
+                <img src="102PX03.jpg" alt="102PX 3" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 3</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('102PX04.jpg', 'Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 4')">
+                <img src="102PX04.jpg" alt="102PX 4" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 4</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('102PX05.jpg', 'Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 5')">
+                <img src="102PX05.jpg" alt="102PX 5" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 5</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('102PX06.jpg', 'Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 6')">
+                <img src="102PX06.jpg" alt="102PX 6" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn Cán bộ chuyên trách Tỉnh Đòng Tháp - Ảnh 6</span></div>
+            </div>
+        </div>
+
+        <!-- Tab Content: TTYT -->
+        <div id="content-ttyt" class="tab-content grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800 border-l-4 border-blue-600 pl-3">Tập huấn TT Y Tế - Khu vực Mỹ Tho</h2>
+                <p class="text-gray-500 mt-2">Ứng dụng công nghệ mới trong nghiệp vụ y tế tại Mỹ Tho.</p>
+            </div>
+            <div class="image-card" onclick="openLightbox('TTYT01.jpg', 'Tập huấn TTYT - Ảnh 1')">
+                <img src="TTYT01.jpg" alt="TTYT 1" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn TTYT - Ảnh 1</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('TTYT02.jpg', 'Tập huấn TTYT - Ảnh 2')">
+                <img src="TTYT02.jpg" alt="TTYT 2" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn TTYT - Ảnh 2</span></div>
+            </div>
+        </div>
+
+        <!-- Tab Content: DTN -->
+        <div id="content-dtn" class="tab-content grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800 border-l-4 border-blue-600 pl-3">Tập huấn cho Đoàn Thanh Niên</h2>
+                <p class="text-gray-500 mt-2">Chương trình bồi dưỡng và huấn luyện kỹ năng cho Đoàn viên.</p>
+            </div>
+            <div class="image-card" onclick="openLightbox('DTN01.jpeg', 'Tập huấn DTN - Ảnh 1')">
+                <img src="DTN01.jpeg" alt="DTN 1" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn DTN - Ảnh 1</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('DTN02.jpeg', 'Tập huấn DTN - Ảnh 2')">
+                <img src="DTN02.jpeg" alt="DTN 2" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn DTN - Ảnh 2</span></div>
+            </div>
+            <div class="image-card" onclick="openLightbox('DTN03.jpeg', 'Tập huấn DTN - Ảnh 3')">
+                <img src="DTN03.jpeg" alt="DTN 3" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Tập huấn DTN - Ảnh 3</span></div>
+            </div>
+        </div>
+
+        <!-- Tab Content: PMBQ -->
+        <div id="content-pmbq" class="tab-content grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800 border-l-4 border-blue-600 pl-3">Hội thảo về phần mềm bản quyền</h2>
+                <p class="text-gray-500 mt-2">Nâng cao nhận thức về sở hữu trí tuệ và sử dụng phần mềm có bản quyền.</p>
+            </div>
+            <div class="image-card" onclick="openLightbox('PMBQ01.jpg', 'Hội thảo PMBQ - Ảnh 1')">
+                <img src="PMBQ01.jpg" alt="PMBQ 1" loading="lazy">
+                <div class="image-overlay"><span class="text-white font-medium">Hội thảo PMBQ - Ảnh 1</span></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center backdrop-blur-sm transition-opacity duration-300">
+        <!-- Close button -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-6 md:right-8 text-white/70 hover:text-white transition-colors p-2 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <!-- Loading spinner (shows while large image loads) -->
+        <div id="lightbox-loader" class="absolute inset-0 flex justify-center items-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+        </div>
+
+        <!-- Image Container -->
+        <div class="relative w-full h-full p-4 md:p-12 flex flex-col items-center justify-center">
+            <img id="lightbox-img" src="" alt="Full screen preview" class="max-w-full max-h-[85vh] object-contain hidden shadow-2xl rounded-sm">
+            <p id="lightbox-caption" class="text-white/80 mt-4 text-center text-lg hidden"></p>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Reset all tab buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+            });
+
+            // Show selected tab content
+            document.getElementById(`content-${tabId}`).classList.add('active');
+
+            // Highlight selected tab button
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+        }
+
+        // Lightbox logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const loader = document.getElementById('lightbox-loader');
+
+        function openLightbox(imageSrc, captionText) {
+            // Show modal and loader, hide old image
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            lightboxImg.classList.add('hidden');
+            lightboxCaption.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            // Set new image source
+            lightboxImg.src = imageSrc;
+            lightboxCaption.textContent = captionText;
+
+            // Wait for image to load before showing it
+            lightboxImg.onload = function() {
+                loader.classList.add('hidden');
+                lightboxImg.classList.remove('hidden');
+                lightboxCaption.classList.remove('hidden');
+            };
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+            // Clear src to prevent old image flash on next open
+            setTimeout(() => { lightboxImg.src = ''; }, 300);
+        }
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target.parentElement === lightbox && e.target !== lightboxImg && e.target !== lightboxCaption) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
