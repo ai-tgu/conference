@@ -17,7 +17,7 @@ const CONFERENCE_DATA = {
       themeColor: "emerald-500",
       members: [
         { name: "ThS. Nguyễn Văn Đậm", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Phó Giám đốc", avatarIcon: "👤" },
-        { name: "PGS. TS. Trần Văn Miền", role: "ĐH Bách khoa TP.HCM", subtitle: "Khoa Kỹ thuật Xây dựng", avatarIcon: "👤" },
+        { name: "PGS. TS. Trần Văn Miền", role: "ĐH Bách Khoa TP.HCM", subtitle: "Khoa Kỹ thuật Xây dựng", avatarIcon: "👤" },
         { name: "TS. Bùi Quang Thịnh", role: "Trường ĐH Tiền Giang", subtitle: "PTP.PT P.QLKHCN&HTQT", avatarIcon: "👤" }
       ]
     },
@@ -26,7 +26,8 @@ const CONFERENCE_DATA = {
       title: "Khách Mời",
       themeColor: "emerald-500",
       members: [
-        { name: "Ông Nguyễn Văn Đậm", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Phó Giám đốc", avatarIcon: "👤" }
+        { name: "Ông Nguyễn Văn Đậm", role: "Sở KH&CN tỉnh Đồng Tháp", subtitle: "Phó Giám đốc", avatarIcon: "👤" },
+        { name: "Ông Trần Văn Miền", role: "ĐH Bách Khoa TP.HCM", subtitle: "Khoa Kỹ thuật Xây dựng", avatarIcon: "👤" }
       ]
     },
     {
