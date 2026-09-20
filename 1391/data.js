@@ -153,6 +153,9 @@ const CONFERENCE_DATA = {
 
   // 2. DỮ LIỆU TÀI LIỆU
   documents: [
+    { id: "tl01", title: "Báo cáo tổng kết kết quả triển khai Nghị quyết số 57-NQ/TW tại Trường Đại học Tiền Giang năm học 2025–2026", type: "PDF", size: "453 KB", url: "./1391/BAO_CAO_TONG_KET.pdf" },
+    { id: "tl02", title: "Khoa học Công nghệ, Đổi mới sáng tạo và Hợp tác Quốc tế tại Trường Đại học Tiền Giang năm học 2025–2026", type: "PDF", size: "13 MB", url: "./1391/TK2526_final.pdf" },
+    { id: "tl03", title: "Chuyển đổi số theo NQ-57/TW tại Trường Đại học Tiền Giang", type: "PDF", size: "453 KB", url: "./1391/CDS_2526.pdf" },
     { id: "doc1", title: "Nghị quyết số 57-NQ/TW", type: "PDF", size: "6.8 MB", url: "./1391/NQ57.pdf" }
   ],
 
